@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Temperature</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+    <header></header>
+
+    <main>
+        <div class="form-container">
+            <div class="form-body">
+                <form>
+                    <div class="form-input-container">
+                        <label for="majorityResult" class="form-label">Majority Humidity Classification:</label>
+                        <input type="text" id="majority_result" class="form-input" value="--" disabled>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+            socket.on('majority_result', function (data) {
+                // Update the majority result in the web page
+                document.getElementById('majority_result').value = data.humid;
+                console.log(data);
+            });
+        </script>
+    </main>
+
+    <footer></footer>
+
+</body>
+</html>
